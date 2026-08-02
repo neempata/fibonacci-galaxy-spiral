@@ -1,0 +1,7 @@
+"""Beginner-friendly launcher for the Fibonacci Galaxy."""
+
+from fibonacci_galaxy.cli import main
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,42 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test and coverage artifacts
+tests/
+_pycache_/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Rendered outputs
+*.mp4
+*.png
+*.gif
+*.jpg
+*.jpeg
+*.webp
+
+# Preview and temporary directories
+previews/
+previews-v2/
+output/
+out/
+tmp/
+*.tmp
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
