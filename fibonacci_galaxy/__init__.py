@@ -1,5 +1,3 @@
-"""Procedural animated Fibonacci galaxy."""
-
 from .geometry import FibonacciSquare, build_fibonacci_tiling, fibonacci_sequence
 from .renderer import GalaxyConfig, render_galaxy, render_preview_frames, show_galaxy
 

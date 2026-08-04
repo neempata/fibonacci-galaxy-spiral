@@ -1,5 +1,3 @@
-"""Mathematically exact Fibonacci tiling and quarter-circle geometry."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -10,7 +8,7 @@ import numpy as np
 
 @dataclass(frozen=True)
 class FibonacciSquare:
-    """A square in the tiling and the quarter-circle drawn inside it."""
+    # A square in the tiling and the quarter-circle drawn inside it.
 
     index: int
     value: int
@@ -54,7 +52,7 @@ class FibonacciSquare:
 
 
 def fibonacci_sequence(terms: int) -> list[int]:
-    """Return Fibonacci values beginning with 1, 1."""
+    # Return Fibonacci values beginning with 1, 1.
     if terms < 1:
         raise ValueError("terms must be at least 1")
     if terms == 1:
@@ -66,11 +64,10 @@ def fibonacci_sequence(terms: int) -> list[int]:
 
 
 def build_fibonacci_tiling(terms: int = 10) -> list[FibonacciSquare]:
-    """Build adjoining squares and a tangent-continuous Fibonacci spiral.
+    # Build adjoining squares and a tangent-continuous Fibonacci spiral.
 
-    The first two unit squares form a 2x1 rectangle. Further squares are added
-    top, left, bottom, and right around the current bounding rectangle.
-    """
+    # The first two unit squares form a 2x1 rectangle. Further squares are added top, left, bottom, and right around the current bounding rectangle.
+    
     values = fibonacci_sequence(terms)
     squares: list[FibonacciSquare] = [
         FibonacciSquare(0, 1, 0, 0, 1, "seed", 1, 1, 180, 270)

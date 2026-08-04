@@ -1,5 +1,3 @@
-"""Beginner-friendly launcher for the Fibonacci Galaxy."""
-
 from fibonacci_galaxy.cli import main
 
 

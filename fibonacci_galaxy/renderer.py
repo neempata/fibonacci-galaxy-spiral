@@ -1,5 +1,3 @@
-"""Procedural artwork and animation renderer for the Fibonacci galaxy."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
@@ -8,8 +6,7 @@ from pathlib import Path
 import imageio_ffmpeg
 import matplotlib
 
-# TkAgg gives the project a native popup window on desktop Python. It also
-# continues to support PNG and MP4 rendering when an output is requested.
+# TkAgg gives the project a native popup window on desktop Python. It also continues to support PNG and MP4 rendering when an output is requested.
 matplotlib.use("TkAgg")
 
 import matplotlib.animation as animation
@@ -74,7 +71,7 @@ def generate_particle_field(
     config: GalaxyConfig,
     squares: list[FibonacciSquare],
 ) -> ParticleField:
-    """Generate reproducible start and target locations for both galaxy arms."""
+    # Generate reproducible start and target locations for both galaxy arms.
     rng = np.random.default_rng(config.seed)
     center, span = _center_and_span(squares)
     count = config.particle_count
@@ -203,8 +200,7 @@ def _setup_scene(config: GalaxyConfig):
     ax.set_aspect("equal")
     ax.axis("off")
 
-    # A tighter crop makes the spiral the dominant visual. The outermost square
-    # is allowed to run slightly beyond the frame for a cinematic composition.
+    # A tighter crop makes the spiral the dominant visual. The outermost square is allowed to run slightly beyond the frame for a cinematic composition.
     half = span * 0.59
     base_limits = (center[0] - half, center[0] + half, center[1] - half, center[1] + half)
     ax.set_xlim(base_limits[:2])
@@ -321,8 +317,7 @@ def _update_scene(scene: dict, config: GalaxyConfig, frame: int):
     background_alpha = _window(time, 0.0, 2.2)
     scene["bg_artist"].set_alpha(0.10 + 0.90 * background_alpha)
 
-    # The mathematical spiral now leads the story. Particles remain at their
-    # final positions and bloom just behind the advancing drawing tip.
+    # The mathematical spiral now leads the story. Particles remain at their final positions and bloom just behind the advancing drawing tip.
     spiral_reveal = _window(time, 0.45, 8.6)
     nebula_alpha = _window(time, 0.25, 3.2)
     scene["nebula_artist"].set_alpha(0.70 * nebula_alpha)
@@ -390,8 +385,7 @@ def show_galaxy(config: GalaxyConfig) -> None:
     """Play the animation in a native Matplotlib popup until it is closed."""
     scene = _setup_scene(config)
     movie = _create_animation(scene, config)
-    # Keep a reference alive while the blocking window is open. Matplotlib
-    # otherwise may garbage-collect an animation before it can play.
+    # Keep a reference alive while the blocking window is open. Matplotlib otherwise may garbage-collect an animation before it can play.
     scene["animation"] = movie
     plt.show()
     plt.close(scene["fig"])
@@ -415,7 +409,7 @@ def render_galaxy(config: GalaxyConfig) -> Path:
 
 
 def render_preview_frames(config: GalaxyConfig, output_dir: Path) -> list[Path]:
-    """Render the opening, midpoint, and final frames as PNGs."""
+    # Render the opening, midpoint, and final frames as PNGs.
     output_dir.mkdir(parents=True, exist_ok=True)
     scene = _setup_scene(config)
     frames = [0, config.frames // 2, config.frames - 1]

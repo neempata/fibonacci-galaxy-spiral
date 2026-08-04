@@ -37,16 +37,6 @@ optional command-line argument exports the same animation as a high-quality MP4.
 
 ## Requirements
 
-- Python 3.10 or newer
-- NumPy 2.0 or newer
-- Matplotlib 3.9 or newer
-- Pillow 11.0 or newer
-- ImageIO-FFmpeg 0.6 or newer
-- Pytest 8.0 or newer for running the tests
-- Tkinter 8.6 or another Matplotlib-compatible desktop GUI backend
-
-Tkinter is normally included with the standard Windows Python installer.
-
 Install the required Python packages from the project directory:
 
 ```powershell
@@ -281,66 +271,6 @@ spiral. Ratios between consecutive Fibonacci numbers approach the golden ratio:
 ```text
 φ ≈ 1.618
 ```
-
-## Animation Timeline
-
-The default 12-second animation is divided into overlapping stages:
-
-| Time | Animation stage |
-| --- | --- |
-| `0.0–2.2s` | Background stars fade in |
-| `0.25–3.2s` | Nebula and central glow become visible |
-| `0.45–8.6s` | The Fibonacci squares and gold spiral grow outward |
-| `0.45–8.6s` | Galaxy particles appear immediately behind the spiral tip |
-| `8.4–10.7s` | Fibonacci values, title, and golden-ratio label fade in |
-| `0.0–11.0s` | The composition rotates six degrees and zooms in seven percent |
-| `11.0–12.0s` | The completed galaxy remains visible before the loop restarts |
-
-Smoothstep interpolation is used instead of abrupt linear changes. This gives
-the fades and motion a softer beginning and ending.
-
-## Project Structure
-
-```text
-fibonacci-galaxy/
-├── fibonacci_galaxy/
-│   ├── __init__.py       Public package exports
-│   ├── cli.py            Command-line arguments and mode selection
-│   ├── geometry.py       Fibonacci sequence, squares, and arc mathematics
-│   └── renderer.py       Particles, artwork, animation, popup, and MP4 export
-├── previews-v2/          Opening, midpoint, and final reference frames
-├── tests/
-│   ├── test_cli.py       Popup and export routing tests
-│   └── test_geometry.py  Geometry and reproducibility tests
-├── run_galaxy.py         Beginner-friendly project launcher
-├── requirements.txt      Python dependencies
-└── README.md             Project guide
-```
-
-The original Turtle experiment is not modified. This version is a separate,
-layered implementation designed for larger particle counts, visual effects,
-testing, and video output.
-
-## Why I Chose This Workflow
-
-I separated the mathematical geometry from the renderer because the two parts
-have different responsibilities. The geometry should remain exact and easy to
-test. The renderer should be free to change colors, particles, timing, and
-effects without changing the Fibonacci calculations.
-
-I used NumPy instead of individual Python loops for most particle operations
-because thousands of coordinates, colors, and opacity values must be updated
-for every frame. NumPy performs those calculations as arrays and is much faster
-than moving thousands of separate Turtle objects.
-
-I used Matplotlib because it can combine exact geometry, scatter plots, text,
-image layers, transformations, popup playback, and animation export in one
-scene. Pillow handles the soft bitmap effects because Gaussian blur and alpha
-compositing are easier to create there than with line-based plotting tools.
-
-I also used a staged validation workflow. Geometry tests run first, three PNG
-frames expose visual problems quickly, smoke mode checks playback and encoding,
-and the expensive production render runs only after the cheaper checks pass.
 
 ## Practical Observations
 
