@@ -1,16 +1,10 @@
 # Animated Fibonacci Galaxy
 
-Create a mathematically guided spiral galaxy using Python, NumPy, Matplotlib,
-Pillow, and FFmpeg.
+Create a mathematically guided spiral galaxy using Python, NumPy, Matplotlib, Pillow, and FFmpeg.
 
-The project builds a true Fibonacci square tiling, draws a connected
-quarter-circle spiral through the squares, and distributes thousands of stars
-around that path. The animation begins near the center and grows outward. A
-golden spiral leads the motion while stars appear behind it, gradually forming
-the galaxy.
+The project builds a true Fibonacci square tiling, draws a connected quarter-circle spiral through the squares and distributes thousands of stars around that path. The animation begins near the center and grows outward golden spiral leads the motion while stars appear behind it, gradually forming the galaxy.
 
-By default, the animation plays in a popup window and is not saved to disk. An
-optional command-line argument exports the same animation as a high-quality MP4.
+By default, the animation plays in a popup window and is not saved to disk. An optional command-line argument exports the same animation as a high-quality MP4.
 
 ![Final Fibonacci Galaxy frame](previews-v2/preview-100-final.png)
 
@@ -51,11 +45,9 @@ Run the project from its main directory:
 python run_galaxy.py
 ```
 
-The animation opens in a popup window, plays for 12 seconds, pauses for one
-second, and then repeats. Close the window to stop the program.
+The animation opens in a popup window, plays for 12 seconds, pauses for one second, and then repeats. Close the window to stop the program.
 
-The popup does not create an MP4 file. This is intentional. File export only
-happens when `--output` is supplied.
+The popup does not create an MP4 file. This is intentional. File export only happens when `--output` is supplied.
 
 ## Export an MP4
 
@@ -71,20 +63,15 @@ The default export contains 360 frames:
 30 frames per second × 12 seconds = 360 frames
 ```
 
-The video uses H.264 compression, the widely compatible `yuv420p` pixel format,
-and a high-quality CRF value of `18`.
+The video uses H.264 compression, the widely compatible `yuv420p` pixel format, and a high-quality CRF value of `18`.
 
-Full export can take several minutes. Do not press VS Code's Stop button, close
-the terminal, or end Python while rendering. FFmpeg must finish writing the MP4
-index before the file can be opened normally.
+Full export can take several minutes. Do not press VS Code's Stop button, closecthe terminal, or end Python while rendering. FFmpeg must finish writing the MP4 index before the file can be opened normally.
 
-When the export is complete, the terminal prints the output path and returns to
-the command prompt.
+When the export is complete, the terminal prints the output path and returns to the command prompt.
 
 ## Fast Testing
 
-Open a lightweight popup with fewer particles, lower resolution, and a shorter
-duration:
+Open a lightweight popup with fewer particles, lower resolution, and a shorter duration:
 
 ```powershell
 python run_galaxy.py --smoke
@@ -104,8 +91,7 @@ Smoke mode uses:
 - 12 frames per second
 - Two seconds of animation
 
-This mode is useful for confirming that the popup, animation, and FFmpeg export
-work before starting the full render.
+This mode is useful for confirming that the popup, animation, and FFmpeg export work before starting the full render.
 
 ## Preview Frames
 
@@ -124,8 +110,7 @@ previews/
 └── preview-100-final.png
 ```
 
-Preview frames are faster to inspect than a complete video and are useful when
-adjusting colors, framing, labels, star density, or the spiral stroke.
+Preview frames are faster to inspect than a complete video and are useful when adjusting colors, framing, labels, star density, or the spiral stroke.
 
 ## Custom Examples
 
@@ -135,8 +120,7 @@ adjusting colors, framing, labels, star density, or the spiral stroke.
 python run_galaxy.py --terms 8
 ```
 
-Fewer terms produce a shorter spiral and a less extreme difference between the
-smallest and largest squares.
+Fewer terms produce a shorter spiral and a less extreme difference between the smallest and largest squares.
 
 ### Generate a different galaxy
 
@@ -144,8 +128,7 @@ smallest and largest squares.
 python run_galaxy.py --seed 2026
 ```
 
-The seed controls all procedural randomness. Running the same seed again
-reproduces the same star positions, colors, and sizes.
+The seed controls all procedural randomness. Running the same seed again reproduces the same star positions, colors, and sizes.
 
 ### Reduce particles for smoother popup playback
 
@@ -173,10 +156,7 @@ python run_galaxy.py `
   --output fibonacci-galaxy-long.mp4
 ```
 
-Changing the duration changes the total number of frames, but the current
-reveal stages still use their fixed times within the first 11 seconds. Longer
-durations add a longer completed hold, while durations below 11 seconds may end
-before every label appears.
+Changing the duration changes the total number of frames, but the current reveal stages still use their fixed times within the first 11 seconds. Longer durations add a longer completed hold, while durations below 11 seconds may end before every label appears.
 
 ## Command-Line Options
 
@@ -204,35 +184,29 @@ python run_galaxy.py --help
 
 The animation pipeline has several stages:
 
-1. A configuration object stores the Fibonacci term count, random seed,
-   particle counts, frame rate, duration, resolution, DPI, and output path.
-2. The program generates the Fibonacci sequence beginning with `1, 1`. Zero is
-   omitted because a square with side length zero cannot be displayed.
-3. Two unit squares are placed beside each other. Every later square is added
-   around the current bounding rectangle in the repeating order top, left,
-   bottom, and right.
-4. Each square receives an arc center and a 90-degree angle range. The endpoint
-   of every arc matches the starting point of the following arc.
-5. Each mathematical arc is sampled into a sequence of `(x, y)` coordinates so
-   Matplotlib can draw it as a smooth line.
-6. NumPy selects an arc and a position along that arc for every galaxy particle.
-   Gaussian offsets give the arm width and prevent the stars from sitting on a
-   perfectly thin line.
-7. A portion of the particles is mirrored around the center to create a dimmer
-   secondary arm. This adds visual realism while preserving the primary
-   Fibonacci construction.
-8. Star colors transition from warm gold near the center to cool blue farther
-   out. A smaller violet group and a few oversized bright stars add variation.
-9. Pillow draws translucent ellipses around the center and small clouds along
-   the spiral. Gaussian blur turns those shapes into the nebula and dust layer.
-10. Matplotlib assembles the background stars, nebula, galaxy particles,
-    squares, spiral, labels, title, and golden-ratio annotation using separate
-    drawing layers.
-11. For every animation frame, the program calculates the current time, reveals
-    more of the spiral, makes nearby stars appear behind the leading tip,
-    adjusts their twinkle, and applies a small rotation and camera zoom.
-12. The completed frames are either displayed by Tkinter in a popup window or
-    streamed to FFmpeg and encoded as an MP4.
+1. A configuration object stores the Fibonacci term count, random seed, particle counts, frame rate, duration, resolution, DPI, and output path.
+
+2. The program generates the Fibonacci sequence beginning with `1, 1`. Zero is omitted because a square with side length zero cannot be displayed.
+
+3. Two unit squares are placed beside each other. Every later square is added around the current bounding rectangle in the repeating order top, left, bottom, and right.
+
+4. Each square receives an arc center and a 90-degree angle range. The endpoint of every arc matches the starting point of the following arc.
+
+5. Each mathematical arc is sampled into a sequence of `(x, y)` coordinates so Matplotlib can draw it as a smooth line.
+
+6. NumPy selects an arc and a position along that arc for every galaxy particle. Gaussian offsets give the arm width and prevent the stars from sitting on a perfectly thin line.
+
+7. A portion of the particles is mirrored around the center to create a dimmer secondary arm. This adds visual realism while preserving the primaryFibonacci construction.
+
+8. Star colors transition from warm gold near the center to cool blue farther out. A smaller violet group and a few oversized bright stars add variation.
+
+9. Pillow draws translucent ellipses around the center and small clouds along the spiral. Gaussian blur turns those shapes into the nebula and dust layer.
+
+10. Matplotlib assembles the background stars, nebula, galaxy particles, squares, spiral, labels, title, and golden-ratio annotation using separate drawing layers.
+
+11. For every animation frame, the program calculates the current time, reveals more of the spiral, makes nearby stars appear behind the leading tip, adjusts their twinkle, and applies a small rotation and camera zoom.
+
+12. The completed frames are either displayed by Tkinter in a popup window or streamed to FFmpeg and encoded as an MP4.
 
 ## The Fibonacci Geometry
 
@@ -248,8 +222,7 @@ Every number after the first two is calculated from the previous two:
 F(n) = F(n - 1) + F(n - 2)
 ```
 
-Each square contains a quarter-circle whose radius equals the square's side
-length. Points on that circle are calculated using:
+Each square contains a quarter-circle whose radius equals the square's side length. Points on that circle are calculated using:
 
 ```text
 x = center_x + radius × cos(angle)
@@ -265,8 +238,7 @@ The arc angles rotate through four ranges:
 | Bottom | 180° | 270° |
 | Right | 270° | 360° |
 
-The resulting Fibonacci spiral is a quarter-circle approximation of the golden
-spiral. Ratios between consecutive Fibonacci numbers approach the golden ratio:
+The resulting Fibonacci spiral is a quarter-circle approximation of the golden spiral. Ratios between consecutive Fibonacci numbers approach the golden ratio:
 
 ```text
 φ ≈ 1.618
