@@ -33,7 +33,7 @@ By default, the animation plays in a popup window and is not saved to disk. An o
 
 Install the required Python packages from the project directory:
 
-```powershell
+```
 python -m pip install -r requirements.txt
 ```
 
