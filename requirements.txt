@@ -1,5 +1,5 @@
 numpy
 matplotlib>=3.9
-Pillow>=11.0
+Pillow
 imageio-ffmpeg>=0.6
 pytest>=8.0
