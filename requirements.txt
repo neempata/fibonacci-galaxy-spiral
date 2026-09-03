@@ -2,4 +2,4 @@ numpy
 matplotlib
 Pillow
 imageio-ffmpeg
-pytest>=8.0
+pytest>=
