@@ -1,5 +1,5 @@
 numpy
 matplotlib
 Pillow
-imageio-ffmpeg>=0.6
+imageio-ffmpeg
 pytest>=8.0
