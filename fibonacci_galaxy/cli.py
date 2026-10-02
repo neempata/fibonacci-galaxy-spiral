@@ -2,7 +2,6 @@ from __future__ import annotations
 
 
 
-
 from .renderer import (
     GalaxyConfig,
     render_galaxy,
